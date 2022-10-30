@@ -31,6 +31,6 @@ Detailed info please ref to https://grpc.github.io/grpc-java/javadoc/<br>
    <code>permitKeepAliveWithoutCalls</code> <br> 
    <code>permitKeepAliveTime</code> <br>
 5. From GRPC best practice, client and server should use PING rather than native TPC keepalive to keep the GRPC connection alive  
-6. Stub is lightweight object with can be freely created, each stub must attach a channel to call API
+6. Refer to GRPC official doc via link <a href="https://grpc.io/docs/guides/performance/">GRPC Performance</a>, get inspiration on how to improve performance 
 7. ManagedChannel has <code>getState</code> API to get its state
 
