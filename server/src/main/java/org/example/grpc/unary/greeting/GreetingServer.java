@@ -1,8 +1,7 @@
-package org.example;
+package org.example.grpc.unary.greeting;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
-import org.example.grpc.greeting.GreetingServiceImpl;
 
 import java.io.IOException;
 
@@ -10,7 +9,7 @@ import java.io.IOException;
  * Hello world!
  *
  */
-public class App 
+public class GreetingServer
 {
     public static void main( String[] args ) throws IOException, InterruptedException
     {

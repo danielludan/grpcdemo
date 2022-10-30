@@ -1,17 +1,17 @@
-package org.example;
+package org.example.grpc.unary.greeting;
+
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.greeting.GreetingServiceGrpc;
-import org.example.grpc.greeting.GreetingServiceOuterClass;
-import org.example.grpc.greeting.HelloRequest;
-import org.example.grpc.greeting.HelloResponse;
+import org.example.grpc.greeting.grpc.greeting.GreetingServiceGrpc;
+import org.example.grpc.greeting.grpc.greeting.HelloRequest;
+import org.example.grpc.greeting.grpc.greeting.HelloResponse;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class GreetingServiceClient
 {
     public static void main( String[] args )
     {

@@ -14,29 +14,21 @@
  * limitations under the License.
  */
 
-package org.example.stream;
+package org.example.grpc.stream.greeting;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import io.grpc.stub.ClientCallStreamObserver;
-import io.grpc.stub.ClientResponseObserver;
-import org.example.grpc.greeting.stream.HelloReply;
-import org.example.grpc.greeting.stream.HelloRequest;
-import org.example.grpc.greeting.stream.StreamingGreeterGrpc;
-import org.example.stream.observer.ClientStreamObserver1;
+import org.example.grpc.stream.greeting.observer.ClientStreamObserver;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
-public class ManualFlowControlClient2 {
+public class StreamGreetingServiceClient2 {
     private static final Logger logger =
-        Logger.getLogger(ManualFlowControlClient2.class.getName());
+        Logger.getLogger(StreamGreetingServiceClient2.class.getName());
 
   public static void main(String[] args) throws InterruptedException {
     final CountDownLatch done = new CountDownLatch(2);
@@ -64,8 +56,8 @@ public class ManualFlowControlClient2 {
 
 
     // Note: clientResponseObserver is handling both request and response stream processing.
-    stub1.sayHelloStreaming(new ClientStreamObserver1(done));
-    stub2.sayHelloStreaming(new ClientStreamObserver1(done));
+    stub1.sayHelloStreaming(new ClientStreamObserver(done));
+    stub2.sayHelloStreaming(new ClientStreamObserver(done));
     System.out.println(String.format("channel2State:" + String.valueOf(channel1.getState(false))));
 //    System.out.println(String.format("channel2State:" + String.valueOf(channel2.getState(false))));
     done.await();

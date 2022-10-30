@@ -1,9 +1,9 @@
-package org.example.stream.observer;
+package org.example.grpc.stream.greeting.observer;
 
 import io.grpc.stub.ClientCallStreamObserver;
 import io.grpc.stub.ClientResponseObserver;
-import org.example.grpc.greeting.stream.HelloReply;
-import org.example.grpc.greeting.stream.HelloRequest;
+import org.example.grpc.stream.greeting.HelloReply;
+import org.example.grpc.stream.greeting.HelloRequest;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -13,15 +13,15 @@ import java.util.logging.Logger;
 
 import static java.lang.Thread.sleep;
 
-public class ClientStreamObserver1 implements ClientResponseObserver<HelloRequest, HelloReply>  {
+public class ClientStreamObserver implements ClientResponseObserver<HelloRequest, HelloReply>  {
 
     ClientCallStreamObserver<HelloRequest> requestStream;
     private final CountDownLatch done;
 
     private static final Logger logger =
-            Logger.getLogger(ClientStreamObserver1.class.getName());
+            Logger.getLogger(ClientStreamObserver.class.getName());
 
-    public ClientStreamObserver1(CountDownLatch done) {
+    public ClientStreamObserver(CountDownLatch done) {
         this.done = done;
     }
 

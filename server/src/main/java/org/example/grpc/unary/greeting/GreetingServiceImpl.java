@@ -1,6 +1,9 @@
-package org.example.grpc.greeting;
+package org.example.grpc.unary.greeting;
 
 import io.grpc.stub.StreamObserver;
+import org.example.grpc.greeting.grpc.greeting.GreetingServiceGrpc;
+import org.example.grpc.greeting.grpc.greeting.HelloRequest;
+import org.example.grpc.greeting.grpc.greeting.HelloResponse;
 
 public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
 

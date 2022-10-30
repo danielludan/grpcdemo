@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.example.grpc.greeting.stream;
+package org.example.grpc.stream.greeting;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
@@ -26,9 +26,9 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
-public class ManualFlowControlServer {
+public class StreamGreetingServer {
   private static final Logger logger =
-      Logger.getLogger(ManualFlowControlServer.class.getName());
+      Logger.getLogger(StreamGreetingServer.class.getName());
 
   public static void main(String[] args) throws InterruptedException, IOException {
     // Service class implementation
