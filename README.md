@@ -32,6 +32,8 @@ There are two modules:
       <code>permitKeepAliveWithoutCalls</code> <br>
       <code>permitKeepAliveTime</code> <br>
 6. From GRPC best practice, client and server should use PING rather than native TPC keepalive to keep the GRPC connection alive  
-7. Refer to GRPC official doc via link <a href="https://grpc.io/docs/guides/performance/">GRPC Performance</a>, get inspiration on how to improve performance 
-8. ManagedChannel has <code>getState</code> API to get its state
+7. Refer to GRPC official doc via link <a href="https://grpc.io/docs/guides/performance/">GRPC Performance</a>, get inspiration on how to improve performance
+8. Consider pooling stub and channel to improve GRPC client side performance and avoid max concurrent stream issue. Ref to <a href="https://httpwg.org/specs/rfc7540.html#rfc.section.5.1.2">Stream Concurrency</a>
+9. ManagedChannel has <code>getState</code> API to get its state
+
 
