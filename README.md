@@ -21,8 +21,8 @@ There are two modules:
 
 ## Learning Marks
 ### Bidirectional Stream API
-1. By default, each channel being created map to one TCP connection, you can use <code>netstat</code> to verify
-2. Channel can be reused by multiple stream, each stream on the same connection has different stream ID, you can use <code>wireshark</code> capturing HTTP2 package to verify
+1. By default, each channel being created map to one TCP connection(could be 0 or many), you can use <code>netstat</code> to verify
+2. Channel can be reused by multiple stream, each stream on the same channel has different stream ID, you can use <code>wireshark</code> capturing HTTP2 package to verify
 3. If channel is not shutdown, on linux system with default tcp keepalive setting, the TCP keepalive probe should be sent after 7200 seconds, you can use <code>wireshark</code> to see there is no TCP probe when no RPC call
 4. Both GRPC server and GRPC client has GRPC ping setting and the setting of the ping on both side should consider setting on another side. Below are the basic configuration on both side<br>
 Detailed info please ref to https://grpc.github.io/grpc-java/javadoc/<br>
