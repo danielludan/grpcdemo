@@ -1,4 +1,5 @@
-# Purpose
+## Purpose
+Learn GRPC by practice
 ## Modules
 There are two modules:
 <li>Server: GRPC server</li>
