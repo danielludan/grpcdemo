@@ -25,13 +25,13 @@ public class StreamGreetingServiceImpl extends GreetingServiceGrpc.GreetingServi
 
             @Override
             public void onError(Throwable throwable) {
-                System.out.println("处理clientFirstGreeting请求错误");
+                System.err.println("处理clientFirstGreeting请求错误");
                 throwable.printStackTrace();
             }
 
             @Override
             public void onCompleted() {
-                System.out.println("结束请求处理");
+                System.err.println("结束请求处理");
                 responseObserver.onCompleted();
             }
         };
@@ -57,13 +57,13 @@ public class StreamGreetingServiceImpl extends GreetingServiceGrpc.GreetingServi
 
             @Override
             public void onError(Throwable throwable) {
-                System.out.println("处理clientFirstGreeting请求错误");
+                System.err.println("处理clientFirstGreeting请求错误");
                 throwable.printStackTrace();
             }
 
             @Override
             public void onCompleted() {
-                System.out.println("结束请求处理");
+                System.err.println("结束请求处理");
                 responseObserver.onCompleted();
             }
         };
