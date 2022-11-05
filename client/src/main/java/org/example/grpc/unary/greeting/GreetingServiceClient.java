@@ -15,7 +15,7 @@ public class GreetingServiceClient
         // 从连接管理器中获取Channel对象
         Channel channel = SDKFacade.getInstance().getConnectionManager().getChannel();
         // 构造客户端的stub
-        GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(SDKFacade.getInstance().getConnectionManager().getChannel());
+        GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
         // 构造请求对象
         HelloRequest request =
                 HelloRequest.newBuilder()
