@@ -7,7 +7,7 @@ import org.example.sdk.common.log.DefaultLogger;
 import org.example.sdk.common.log.Logger;
 import org.example.sdk.grpc.connection.ConnectionManager;
 import org.example.sdk.grpc.connection.DefaultConnectionManager;
-import org.example.sdk.grpc.connection.config.ConnectionManagerConfig;
+import org.example.sdk.grpc.connection.ConnectionManagerConfig;
 
 /**
  * SDK的门面模式，需要有一个统一入口对SDK进行整体组建的生命周期管理并且提供内部需要的组建实例

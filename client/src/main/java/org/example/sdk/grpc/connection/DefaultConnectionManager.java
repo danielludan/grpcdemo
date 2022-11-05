@@ -7,7 +7,6 @@ import io.grpc.ManagedChannelBuilder;
 import org.example.sdk.common.exception.ConnectionException;
 import org.example.sdk.common.exception.ErrorCodeConstant;
 import org.example.sdk.common.log.DefaultLogger;
-import org.example.sdk.grpc.connection.config.ConnectionManagerConfig;
 
 import java.util.ArrayList;
 import java.util.List;

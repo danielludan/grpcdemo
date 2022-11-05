@@ -1,4 +1,4 @@
-package org.example.sdk.grpc.connection.config;
+package org.example.sdk.grpc.connection;
 
 import org.example.sdk.common.config.ConfigReader;
 
