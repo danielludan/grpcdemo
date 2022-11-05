@@ -18,7 +18,6 @@ option java_package = "org.example.grpc.greeting.stream";
 option java_outer_classname = "HelloStreamingProto";
 option objc_class_prefix = "HLWS";
 
-package manualflowcontrol;
 
 // The greeting service definition.
 service StreamingGreeter {
