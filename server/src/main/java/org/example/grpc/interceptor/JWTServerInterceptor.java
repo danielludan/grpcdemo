@@ -16,7 +16,7 @@ public class JWTServerInterceptor implements ServerInterceptor {
 
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
-        System.out.println("收到服务器的JWT:" + metadata.get(Metadata.Key.of(JWT_HEADER, ASCII_STRING_MARSHALLER)));
+        System.out.println("收到客户端的JWT:" + metadata.get(Metadata.Key.of(JWT_HEADER, ASCII_STRING_MARSHALLER)));
         System.out.println("验证JWT签名:通过");
         return serverCallHandler.startCall(serverCall, metadata);
     }
