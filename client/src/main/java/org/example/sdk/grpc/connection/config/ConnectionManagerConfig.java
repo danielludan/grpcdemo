@@ -10,6 +10,10 @@ public class ConnectionManagerConfig {
     // 配置读取器
     private ConfigReader configReader;
 
+    public ConnectionManagerConfig(ConfigReader configReader) {
+        this.configReader = configReader;
+    }
+
     /**
      * 获取最大连接数
      * @return

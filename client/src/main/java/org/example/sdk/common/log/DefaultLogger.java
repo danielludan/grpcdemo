@@ -18,24 +18,24 @@ public class DefaultLogger implements Logger {
     @Override
     public void debug(Object msg) {
         //TODO 示范代码，待实现
-        System.out.printf("[DEBUG]:%s" + msg);
+        System.out.printf("[DEBUG]:%s%n", msg);
     }
 
     @Override
     public void info(Object msg) {
         //TODO 示范代码，待实现
-        System.out.printf("[INFO]:%s" + msg);
+        System.out.printf("[INFO]:%s%n", msg);
     }
 
     @Override
     public void warn(Object msg) {
         //TODO 示范代码，待实现
-        System.out.printf("[WARN]:%s" + msg);
+        System.out.printf("[WARN]:%s%n", msg);
     }
 
     @Override
     public void error(Object msg) {
         //TODO 示范代码，待实现
-        System.out.printf("[ERROR]:%s" + msg);
+        System.out.printf("[ERROR]:%s%n", msg);
     }
 }

@@ -1,8 +1,8 @@
 package org.example.grpc.unary.greeting;
 
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+import io.grpc.Channel;
+import org.example.sdk.SDKFacade;
 
 /**
  * Hello world!
@@ -12,29 +12,20 @@ public class GreetingServiceClient
 {
     public static void main( String[] args )
     {
-
-        // Channel is the abstraction to connect to a service endpoint
-        // Let's use plaintext communication because we don't have certs
-        final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:9999")
-                .usePlaintext()
-                .build();
-
-        // It is up to the client to determine whether to block the call
-        // Here we create a blocking stub, but an async stub,
-        // or an async stub with Future are always possible.
-        GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(channel);
+        // 从连接管理器中获取Channel对象
+        Channel channel = SDKFacade.getInstance().getConnectionManager().getChannel();
+        // 构造客户端的stub
+        GreetingServiceGrpc.GreetingServiceBlockingStub stub = GreetingServiceGrpc.newBlockingStub(SDKFacade.getInstance().getConnectionManager().getChannel());
+        // 构造请求对象
         HelloRequest request =
                 HelloRequest.newBuilder()
-                        .setName("Ray")
+                        .setName("Daniel")
                         .build();
 
-        // Finally, make the call using the stub
+        // 调用方法，获得响应内容
         HelloResponse response =
                 stub.greeting(request);
-
-        System.out.println(response);
-
-        // A Channel should be shutdown before stopping the process.
-        channel.shutdownNow();
+        SDKFacade.getInstance().getLogger().info(response);
+        SDKFacade.getInstance().close();
     }
 }

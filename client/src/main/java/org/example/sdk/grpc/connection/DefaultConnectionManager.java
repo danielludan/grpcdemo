@@ -35,12 +35,14 @@ public class DefaultConnectionManager implements ConnectionManager {
 
     @Override
     public void init() {
+        DefaultLogger.getLogger().info(String.format("初始化%d个Channel对象", config.getConnectionNumber()));
         for (int i=0;i<config.getConnectionNumber();i++) {
             ManagedChannel channel = ManagedChannelBuilder
                     .forAddress(config.getHostName(), config.getHostPort())
                     .keepAliveTime(config.getPingIntervalInSec(), TimeUnit.SECONDS)
                     .keepAliveTimeout(config.getPingTimeoutInSec(), TimeUnit.SECONDS)
                     .keepAliveWithoutCalls(true)
+                    .usePlaintext() // 目前测试期间用非tls
                     .build();
             channels.add(channel);
         }
@@ -65,16 +67,21 @@ public class DefaultConnectionManager implements ConnectionManager {
         ManagedChannel channel = null;
         for (int i=0;i<config.getConnectionNumber();i++) {
             ManagedChannel tmpChannel = channels.get(count % config.getConnectionNumber());
-            if (tmpChannel.getState(true) == ConnectivityState.READY) {
+            if (tmpChannel.getState(true) == ConnectivityState.READY ||
+                    tmpChannel.getState(false) == ConnectivityState.IDLE) {
                 DefaultLogger.getLogger().debug("发现有效连接");
                 channel = tmpChannel;
                 count++;
             } else if (tmpChannel.getState(false) == ConnectivityState.CONNECTING ||
                        tmpChannel.getState(false) == ConnectivityState.TRANSIENT_FAILURE) {
                 //TODO 部分状态为瞬时状态，考虑如何优雅处理
+                DefaultLogger.getLogger().debug(String.format("连接状态为%s", tmpChannel.getState(false)));
             } else if (tmpChannel.getState(false) == ConnectivityState.SHUTDOWN) {
                 DefaultLogger.getLogger().info("该连接关闭");
                 //TODO 如不能恢复重用则重新创建放回
+                DefaultLogger.getLogger().debug(String.format("连接状态为%s", tmpChannel.getState(false)));
+            } else {
+                DefaultLogger.getLogger().debug(String.format("连接状态为%s", tmpChannel.getState(false)));
             }
         }
         if (channel == null) {
