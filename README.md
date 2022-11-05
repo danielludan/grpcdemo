@@ -11,10 +11,10 @@ There are two modules:
 <li><code>org.example.grpc.stream</code>: Stream communication API</li>
 
 <b>GRPC Server Class Name</b>
-<li>XXXServer[optional number] : Class to start GRPC server, if there is a number suffixed means it is a duplicated server with different port</li>
+<li>XXXServer : Class to start GRPC server</li>
 
 <b>GRPC Client Class Name</b>
-<li>XXXClient[optional number] : Client to establish connection and communicate with GRPC server, if there is a number suffixed means it is a duplicated client with different port</li>
+<li>XXXClient: Client to establish connection and communicate with GRPC server</li>
 
 ## IDL
 <b>Location</b> : <code>src/main/proto</code>
