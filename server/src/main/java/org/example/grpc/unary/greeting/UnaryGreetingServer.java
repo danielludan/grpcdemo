@@ -6,27 +6,24 @@ import io.grpc.ServerBuilder;
 import java.io.IOException;
 
 /**
- * Hello world!
- *
+ * 请求响应服务启动类
  */
 public class
 
-
-
-GreetingServer
+UnaryGreetingServer
 {
     public static void main( String[] args ) throws IOException, InterruptedException
     {
 
         Server server = ServerBuilder.forPort(9999)
-                .addService(new GreetingServiceImpl())
+                .addService(new UnaryGreetingServiceImpl())
                 .build();
 
         // Start the server
         server.start();
 
         // Server threads are running in the background.
-        System.out.println("Server started");
+        System.out.println("服务在端口" + server.getPort() + "启动");
         // Don't exit the main thread. Wait until server is terminated.
         server.awaitTermination();
     }

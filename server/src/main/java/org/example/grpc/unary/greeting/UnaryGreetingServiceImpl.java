@@ -3,7 +3,10 @@ package org.example.grpc.unary.greeting;
 
 import io.grpc.stub.StreamObserver;
 
-public class GreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
+/**
+ * 请求响应服务实现类
+ */
+public class UnaryGreetingServiceImpl extends GreetingServiceGrpc.GreetingServiceImplBase {
 
     @Override
     public void greeting(HelloRequest request,

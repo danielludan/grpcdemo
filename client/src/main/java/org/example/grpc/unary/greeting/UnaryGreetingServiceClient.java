@@ -8,7 +8,7 @@ import org.example.sdk.SDKFacade;
  * Hello world!
  *
  */
-public class GreetingServiceClient
+public class UnaryGreetingServiceClient
 {
     public static void main( String[] args )
     {
