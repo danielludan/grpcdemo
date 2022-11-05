@@ -18,7 +18,7 @@ GreetingServer
     public static void main( String[] args ) throws IOException, InterruptedException
     {
 
-        Server server = ServerBuilder.forPort(8080)
+        Server server = ServerBuilder.forPort(9999)
                 .addService(new GreetingServiceImpl())
                 .build();
 

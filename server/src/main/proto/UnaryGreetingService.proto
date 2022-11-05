@@ -1,5 +1,5 @@
 syntax = "proto3";
-package org.example.grpc.greeting;
+package org.example.grpc.unary.greeting;
 option java_multiple_files = true;
 
 // Request payload
@@ -26,3 +26,4 @@ service GreetingService {
   // Define a RPC operation
   rpc greeting(HelloRequest) returns (HelloResponse);
 }
+

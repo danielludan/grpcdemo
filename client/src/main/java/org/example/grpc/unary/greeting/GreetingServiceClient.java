@@ -3,9 +3,6 @@ package org.example.grpc.unary.greeting;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.greeting.grpc.greeting.GreetingServiceGrpc;
-import org.example.grpc.greeting.grpc.greeting.HelloRequest;
-import org.example.grpc.greeting.grpc.greeting.HelloResponse;
 
 /**
  * Hello world!
@@ -18,7 +15,7 @@ public class GreetingServiceClient
 
         // Channel is the abstraction to connect to a service endpoint
         // Let's use plaintext communication because we don't have certs
-        final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:8080")
+        final ManagedChannel channel = ManagedChannelBuilder.forTarget("localhost:9999")
                 .usePlaintext()
                 .build();
 

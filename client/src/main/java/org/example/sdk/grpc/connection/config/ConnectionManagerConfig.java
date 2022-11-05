@@ -23,9 +23,18 @@ public class ConnectionManagerConfig {
      * 获取服务地址
      * @return
      */
-    public String getHostAddress() {
+    public String getHostName() {
         //TODO 通过configReader读取
-        return "localhost:9999";
+        return "localhost";
+    }
+
+    /**
+     * 获取服务端口
+     * @return
+     */
+    public Integer getHostPort() {
+        //TODO 通过configReader读取
+        return 9999;
     }
 
     /**

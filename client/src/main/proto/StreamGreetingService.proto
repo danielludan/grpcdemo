@@ -1,0 +1,33 @@
+syntax = "proto3";
+package org.example.grpc.stream.greeting;
+option java_multiple_files = true;
+
+// 请求对象
+message HelloRequest {
+  //客户端传递的名称
+  string name = 1;
+
+  // This defines a strongly typed list of String
+  repeated string hobbies = 2;
+
+  // There are many more basics types, like Enum, Map
+  // See https://developers.google.com/protocol-buffers/docs/proto3
+  // for more information.
+}
+
+// 响应对象
+message HelloResponse {
+  //服务端问候的内容
+  string greeting = 1;
+}
+
+// 问候服务
+service GreetingService {
+  //需客户端先发起请求内容的双向流方法
+  rpc clientFirstGreeting(stream HelloRequest) returns (stream HelloResponse);
+
+
+  //需客户端先发起问候内容的双向流方法
+  rpc serverFirstGreeting(stream HelloRequest) returns (stream HelloResponse);
+}
+

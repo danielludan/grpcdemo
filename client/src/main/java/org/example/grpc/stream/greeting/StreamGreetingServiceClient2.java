@@ -48,16 +48,16 @@ public class StreamGreetingServiceClient2 {
 //              .keepAliveTimeout(5, TimeUnit.SECONDS)
 //              .keepAliveWithoutCalls(true)
 //              .build();
-    StreamingGreeterGrpc.StreamingGreeterStub stub1 = StreamingGreeterGrpc.newStub(channel1);
-    StreamingGreeterGrpc.StreamingGreeterStub stub2 = StreamingGreeterGrpc.newStub(channel1);
+//    StreamingGreeterGrpc.StreamingGreeterStub stub1 = StreamingGreeterGrpc.newStub(channel1);
+//    StreamingGreeterGrpc.StreamingGreeterStub stub2 = StreamingGreeterGrpc.newStub(channel1);
 
     // When using manual flow-control and back-pressure on the client, the ClientResponseObserver handles both
     // request and response streams.
 
 
     // Note: clientResponseObserver is handling both request and response stream processing.
-    stub1.sayHelloStreaming(new ClientStreamObserver(done));
-    stub2.sayHelloStreaming(new ClientStreamObserver(done));
+//    stub1.sayHelloStreaming(new ClientStreamObserver(done));
+//    stub2.sayHelloStreaming(new ClientStreamObserver(done));
     System.out.println(String.format("channel2State:" + String.valueOf(channel1.getState(false))));
 //    System.out.println(String.format("channel2State:" + String.valueOf(channel2.getState(false))));
     done.await();

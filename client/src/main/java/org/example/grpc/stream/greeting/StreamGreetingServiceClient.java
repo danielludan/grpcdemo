@@ -48,7 +48,7 @@ public class StreamGreetingServiceClient {
 //              .keepAliveTimeout(5, TimeUnit.SECONDS)
 //              .keepAliveWithoutCalls(true)
 //              .build();
-        StreamingGreeterGrpc.StreamingGreeterStub stub = StreamingGreeterGrpc.newStub(channel);
+//        StreamingGreeterGrpc.StreamingGreeterStub stub = StreamingGreeterGrpc.newStub(channel);
 
 //        StreamingGreeterGrpc.StreamingGreeterFutureStub stub1 = StreamingGreeterGrpc.newFutureStub(channel);
 
@@ -57,7 +57,7 @@ public class StreamGreetingServiceClient {
 
 
         // Note: clientResponseObserver is handling both request and response stream processing.
-        stub.sayHelloStreaming(new ClientStreamObserver(done));
+//        stub.sayHelloStreaming(new ClientStreamObserver(done));
         System.out.println(String.format("channel2State:" + String.valueOf(channel.getState(false))));
 //    System.out.println(String.format("channel2State:" + String.valueOf(channel2.getState(false))));
         done.await();
