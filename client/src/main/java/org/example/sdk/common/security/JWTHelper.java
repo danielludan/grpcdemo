@@ -16,7 +16,7 @@ public class JWTHelper {
      */
     public String createToken(Map<String, Object> headers, Map<String, Object> payload) {
         //TODO 实现生成逻辑
-        return "JWT-Token-Sample";
+        return "mocked-jwt-token001";
     }
 
 }

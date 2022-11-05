@@ -5,6 +5,7 @@ import org.example.sdk.common.config.YamlConfigReader;
 import org.example.sdk.common.lifecycle.Lifecycle;
 import org.example.sdk.common.log.DefaultLogger;
 import org.example.sdk.common.log.Logger;
+import org.example.sdk.common.security.JWTHelper;
 import org.example.sdk.grpc.connection.ConnectionManager;
 import org.example.sdk.grpc.connection.DefaultConnectionManager;
 import org.example.sdk.grpc.connection.ConnectionManagerConfig;
@@ -18,6 +19,7 @@ public class SDKFacade implements Lifecycle {
     private ConnectionManagerConfig connectionManagerConfig;
     private ConnectionManager connectionManager;
     private ConfigReader configReader;
+    private JWTHelper jwtHelper;
 
     static {
         instance.init();
@@ -43,10 +45,18 @@ public class SDKFacade implements Lifecycle {
         return DefaultLogger.getLogger();
     }
 
+    public JWTHelper getJwtHelper() {
+        return this.jwtHelper;
+    }
+
+    /**
+     * 记住组建之间有依赖的需要考虑初始化的先后顺序，依赖的组建需要先初始化且不允许存在循环依赖。
+     */
     @Override
     public void init() {
         getLogger().info("SDK组建资源初始化");
         this.configReader = new YamlConfigReader();
+        this.jwtHelper = new JWTHelper();
         this.connectionManagerConfig = new ConnectionManagerConfig(configReader);
         this.connectionManager = new DefaultConnectionManager(connectionManagerConfig);
         this.connectionManager.init();

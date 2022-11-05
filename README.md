@@ -11,7 +11,7 @@ There are two modules:
 <li><code>org.example.grpc.stream</code>: Stream communication API</li>
 
 <b>GRPC Server Class Name</b>
-<li>XXXServer : Class to start GRPC server</li>
+<li>GRPCServer : Class to start GRPC server</li>
 
 <b>GRPC Client Class Name</b>
 <li>XXXClient: Client to establish connection and communicate with GRPC server</li>
