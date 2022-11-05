@@ -5,9 +5,7 @@ import io.grpc.Channel;
 import io.grpc.stub.StreamObserver;
 import org.example.sdk.SDKFacade;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -31,18 +29,20 @@ public class StreamGreetingServiceClientFirst {
            requestStreamObserver.onNext(request);
            if (done.getCount() == 0) {
                // 其他地方设置完成，提前结束
+               System.out.println("客户端提前结束");
                return;
            }
        }
 
         // 标记请求结束
-        requestStreamObserver.onCompleted();
-       Thread.sleep(100);
+       requestStreamObserver.onCompleted();
+       Thread.sleep(500);
 
-        // Receiving happens asynchronously
-        if (!done.await(1, TimeUnit.MINUTES)) {
-            System.err.println("客户端在发送完最后的请求后一分钟内无法结束");
-        }
+       // 等1分钟收到结束信号
+       if (!done.await(1, TimeUnit.MINUTES)) {
+           System.err.println("客户端在发送完最后的请求后一分钟内无法结束");
+       }
+       SDKFacade.getInstance().close();
     }
 
 }

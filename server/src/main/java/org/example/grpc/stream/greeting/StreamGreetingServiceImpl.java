@@ -32,12 +32,14 @@ public class StreamGreetingServiceImpl extends GreetingServiceGrpc.GreetingServi
             @Override
             public void onCompleted() {
                 System.out.println("结束请求处理");
+                responseObserver.onCompleted();
             }
         };
     }
 
     @Override
     public StreamObserver<HelloRequest> serverFirstGreeting(final StreamObserver<HelloResponse> responseObserver) {
+        System.out.println("发送服务器的第一声问候");
         HelloResponse response = HelloResponse.newBuilder().setGreeting("来自服务器的第1声问候").build();
         responseObserver.onNext(response);
 
@@ -47,6 +49,7 @@ public class StreamGreetingServiceImpl extends GreetingServiceGrpc.GreetingServi
 
             @Override
             public void onNext(HelloRequest helloRequest) {
+                System.out.printf("接受请求:%s%n", helloRequest.getName());
                 HelloResponse response = HelloResponse.newBuilder().setGreeting(String.format("服务器第%d次问候:%s",
                         count.incrementAndGet(), helloRequest.getName())).build();
                 responseObserver.onNext(response);
@@ -61,6 +64,7 @@ public class StreamGreetingServiceImpl extends GreetingServiceGrpc.GreetingServi
             @Override
             public void onCompleted() {
                 System.out.println("结束请求处理");
+                responseObserver.onCompleted();
             }
         };
     }

@@ -45,6 +45,7 @@ public class SDKFacade implements Lifecycle {
 
     @Override
     public void init() {
+        getLogger().info("SDK组建资源初始化");
         this.configReader = new YamlConfigReader();
         this.connectionManagerConfig = new ConnectionManagerConfig(configReader);
         this.connectionManager = new DefaultConnectionManager(connectionManagerConfig);
@@ -53,6 +54,7 @@ public class SDKFacade implements Lifecycle {
 
     @Override
     public void close() {
+        getLogger().info("SDK组建资源关闭");
         this.connectionManager.close();;
     }
 }
