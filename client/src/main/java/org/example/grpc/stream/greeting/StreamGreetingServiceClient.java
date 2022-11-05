@@ -50,6 +50,8 @@ public class StreamGreetingServiceClient {
 //              .build();
         StreamingGreeterGrpc.StreamingGreeterStub stub = StreamingGreeterGrpc.newStub(channel);
 
+//        StreamingGreeterGrpc.StreamingGreeterFutureStub stub1 = StreamingGreeterGrpc.newFutureStub(channel);
+
         // When using manual flow-control and back-pressure on the client, the ClientResponseObserver handles both
         // request and response streams.
 

@@ -9,7 +9,11 @@ import java.io.IOException;
  * Hello world!
  *
  */
-public class GreetingServer
+public class
+
+
+
+GreetingServer
 {
     public static void main( String[] args ) throws IOException, InterruptedException
     {
