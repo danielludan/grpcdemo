@@ -1,5 +1,8 @@
-## Purpose
-Learn GRPC by practice
+## 目的
+GRPC作为国外的主流RPC开发框架对于中国的大多数小伙伴而言还比较陌生。由于GRPC本身在GO语言更为流行，因此想通过Java来
+学习并使用GRPC框架可能在初期会遇到一些问题。希望通过该项目展示一个更纯粹的GRPC Java使用方式，同时对于自己，
+也希望记录如何从熟悉的HTTP1.1线性编程思想转向为HTTP2双工异步编程思想过程中的学习总结。
+
 ## Modules
 There are two modules:
 <li>Server: GRPC server</li>
