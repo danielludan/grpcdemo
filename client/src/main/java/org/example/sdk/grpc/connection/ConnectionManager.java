@@ -3,6 +3,8 @@ package org.example.sdk.grpc.connection;
 import io.grpc.Channel;
 import org.example.sdk.common.lifecycle.Lifecycle;
 
+import java.util.Map;
+
 /**
  * GRPC连接管理对象接口，负责管理GRPC Channel对象的生命周期并向Stub提供其构造方法的Channel实例。
  * ConnectionManager实现了
@@ -16,5 +18,11 @@ public interface ConnectionManager extends Lifecycle {
      * @throws org.example.sdk.common.exception.ConnectionException 获取连接异常时抛出
      */
     Channel getChannel();
+
+    /**
+     * 获取Channel对象的状态信息
+     * @return
+     */
+    Map<String, Object> getChannelState();
 
 }

@@ -9,21 +9,22 @@ GRPC作为国外的主流RPC开发框架对于中国的大多数小伙伴而言�
 <li>client: GRPC客户端代码</li>
 
 ## 命名规范
-<b>Packages</b>
-<li><code>org.example.grpc.unary</code>: Request and Response unary communication API</li>
-<li><code>org.example.grpc.stream</code>: Stream communication API</li>
+<b>包命名</b>
+<li><code>org.example.grpc.unary</code>: GRPC请求响应模式包</li>
+<li><code>org.example.grpc.stream</code>: GRPC流模型包</li>
+<li><code>org.example.sdk</code>: 客户端SDK工具包，降低客户端使用GRPC的难度</li>
 
-<b>GRPC Server Class Name</b>
-<li>GRPCServer : Class to start GRPC server</li>
+<b>GRPC服务端</b>
+<li>GRPCServer : GRPC服务端启动类，默认端口9999</li>
 
-<b>GRPC Client Class Name</b>
-<li>XXXClient: Client to establish connection and communicate with GRPC server</li>
+<b>GRPC客户端</b>
+<li>XXXClient: GRPC客户端访问启动类，默认连接localhost:9999</li>
 
-## IDL
-<b>Location</b> : <code>src/main/proto</code>
+## IDL/接口定义文件
+<b>位置</b> : <code>src/main/proto</code>
 
-## Learning Marks
-### Bidirectional Stream API
+## 学习笔记
+### 双向流API
 1. By default, each channel being created map to one TCP connection(could be 0 or many), you can use <code>netstat</code> to verify
 2. Channel can be reused by multiple stream, each stream on the same channel has different stream ID, you can use <code>wireshark</code> capturing HTTP2 package to verify
 3. If channel is not shutdown, on linux system with default tcp keepalive setting, the TCP keepalive probe should be sent after 7200 seconds, you can use <code>wireshark</code> to see there is no TCP probe when no RPC call

@@ -1,11 +1,14 @@
 package org.example.sdk;
 
+import io.grpc.ManagedChannel;
 import org.example.sdk.common.config.ConfigReader;
 import org.example.sdk.common.config.YamlConfigReader;
+import org.example.sdk.common.lb.LoadBalancer;
 import org.example.sdk.common.lifecycle.Lifecycle;
 import org.example.sdk.common.log.DefaultLogger;
 import org.example.sdk.common.log.Logger;
 import org.example.sdk.common.security.JWTHelper;
+import org.example.sdk.grpc.connection.ChannelRoundRobinLoadBalancer;
 import org.example.sdk.grpc.connection.ConnectionManager;
 import org.example.sdk.grpc.connection.DefaultConnectionManager;
 import org.example.sdk.grpc.connection.ConnectionManagerConfig;
@@ -22,6 +25,7 @@ public class SDKFacade implements Lifecycle {
     private ConfigReader configReader;
     private JWTHelper jwtHelper;
     private ClientInfoConfig clientInfoConfig;
+    private LoadBalancer<ManagedChannel> lb;
 
     static {
         instance.init();
@@ -65,7 +69,8 @@ public class SDKFacade implements Lifecycle {
         this.jwtHelper = new JWTHelper();
         this.connectionManagerConfig = new ConnectionManagerConfig(configReader);
         this.clientInfoConfig = new ClientInfoConfig(configReader);
-        this.connectionManager = new DefaultConnectionManager(connectionManagerConfig);
+        this.lb = new ChannelRoundRobinLoadBalancer(connectionManagerConfig);
+        this.connectionManager = new DefaultConnectionManager(connectionManagerConfig, this.lb);
         this.connectionManager.init();
     }
 
