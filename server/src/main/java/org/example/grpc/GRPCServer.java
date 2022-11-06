@@ -2,6 +2,7 @@ package org.example.grpc;
 
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
+import org.example.grpc.interceptor.ClientInfoServerInterceptor;
 import org.example.grpc.interceptor.JWTServerInterceptor;
 import org.example.grpc.stream.greeting.StreamGreetingServiceImpl;
 import org.example.grpc.unary.greeting.UnaryGreetingServiceImpl;
@@ -19,6 +20,7 @@ public class GRPCServer {
         Server server = ServerBuilder.forPort(9999)
                 .addService(new UnaryGreetingServiceImpl())
                 .addService(new StreamGreetingServiceImpl())
+                .intercept(new ClientInfoServerInterceptor())
                 .intercept(new JWTServerInterceptor())
                 .build();
 

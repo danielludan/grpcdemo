@@ -8,6 +8,7 @@ import org.example.sdk.SDKFacade;
 import org.example.sdk.common.exception.ConnectionException;
 import org.example.sdk.common.exception.ErrorCodeConstant;
 import org.example.sdk.common.log.DefaultLogger;
+import org.example.sdk.grpc.interceptor.ClientInfoClientInterceptor;
 import org.example.sdk.grpc.interceptor.JWTClientInterceptor;
 
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class DefaultConnectionManager implements ConnectionManager {
                     .keepAliveTimeout(config.getPingTimeoutInSec(), TimeUnit.SECONDS)
                     .keepAliveWithoutCalls(true)
                     .intercept(new JWTClientInterceptor(SDKFacade.getInstance().getJwtHelper()))
+                    .intercept(new ClientInfoClientInterceptor(SDKFacade.getInstance().getClientInfoConfig()))
                     .usePlaintext() // 目前测试期间用非tls
                     .build();
             channels.add(channel);

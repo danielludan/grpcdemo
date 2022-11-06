@@ -9,6 +9,7 @@ import org.example.sdk.common.security.JWTHelper;
 import org.example.sdk.grpc.connection.ConnectionManager;
 import org.example.sdk.grpc.connection.DefaultConnectionManager;
 import org.example.sdk.grpc.connection.ConnectionManagerConfig;
+import org.example.sdk.grpc.interceptor.ClientInfoConfig;
 
 /**
  * SDK的门面模式，需要有一个统一入口对SDK进行整体组建的生命周期管理并且提供内部需要的组建实例
@@ -20,6 +21,7 @@ public class SDKFacade implements Lifecycle {
     private ConnectionManager connectionManager;
     private ConfigReader configReader;
     private JWTHelper jwtHelper;
+    private ClientInfoConfig clientInfoConfig;
 
     static {
         instance.init();
@@ -49,6 +51,10 @@ public class SDKFacade implements Lifecycle {
         return this.jwtHelper;
     }
 
+    public ClientInfoConfig getClientInfoConfig() {
+        return this.clientInfoConfig;
+    }
+
     /**
      * 记住组建之间有依赖的需要考虑初始化的先后顺序，依赖的组建需要先初始化且不允许存在循环依赖。
      */
@@ -58,6 +64,7 @@ public class SDKFacade implements Lifecycle {
         this.configReader = new YamlConfigReader();
         this.jwtHelper = new JWTHelper();
         this.connectionManagerConfig = new ConnectionManagerConfig(configReader);
+        this.clientInfoConfig = new ClientInfoConfig(configReader);
         this.connectionManager = new DefaultConnectionManager(connectionManagerConfig);
         this.connectionManager.init();
     }

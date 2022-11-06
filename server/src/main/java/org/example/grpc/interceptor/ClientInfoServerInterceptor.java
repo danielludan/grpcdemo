@@ -8,17 +8,16 @@ import io.grpc.ServerInterceptor;
 import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
 
 /**
- * 服务器处理JWT的拦截器
+ * 服务器处理ClientInfo的拦截器
  */
-public class JWTServerInterceptor implements ServerInterceptor {
+public class ClientInfoServerInterceptor implements ServerInterceptor {
 
-    private static String JWT_HEADER = "Authorization";
+    private static String CLIENT_ID_HEADER = "Client-ID";
 
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
-        System.out.println("收到客户端的JWT:" + metadata.get(Metadata.Key.of(JWT_HEADER, ASCII_STRING_MARSHALLER)));
-        // TODO: 模拟验证JWT签名
-        System.out.println("验证JWT签名:通过");
+        System.out.println("收到客户端的Client-ID:" + metadata.get(Metadata.Key.of(CLIENT_ID_HEADER, ASCII_STRING_MARSHALLER)));
+        // TODO: 模拟验证Client-ID
         return serverCallHandler.startCall(serverCall, metadata);
     }
 

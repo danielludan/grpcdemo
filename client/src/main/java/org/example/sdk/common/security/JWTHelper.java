@@ -7,6 +7,8 @@ import java.util.Map;
  */
 public class JWTHelper {
 
+    
+
     /**
      * 根据输入的头和数据内容生成JWT Base64编码的字符串
      * @param headers 头信息
@@ -16,7 +18,12 @@ public class JWTHelper {
      */
     public String createToken(Map<String, Object> headers, Map<String, Object> payload) {
         //TODO 实现生成逻辑
-        return "mocked-jwt-token001";
+        return "mock-jwt-token001";
+    }
+
+    public String createToken() {
+        //TODO 通过客户配置直接生成JWT token
+        return createToken(null, null);
     }
 
 }
