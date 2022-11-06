@@ -3,12 +3,12 @@ GRPC作为国外的主流RPC开发框架对于中国的大多数小伙伴而言�
 学习并使用GRPC框架可能在初期会遇到一些问题。希望通过该项目展示一个更纯粹的GRPC Java使用方式，同时对于自己，
 也希望记录如何从熟悉的HTTP1.1线性编程思想转向为HTTP2双工异步编程思想过程中的学习总结。
 
-## Modules
-There are two modules:
-<li>Server: GRPC server</li>
-<li>Client: GRPC client</li>
+## 项目模块
+根据连接发起的角色分为两个模块，分别放在以下两个不同的目录
+<li>server: GRPC服务端代码</li>
+<li>client: GRPC客户端代码</li>
 
-## Naming Convention
+## 命名规范
 <b>Packages</b>
 <li><code>org.example.grpc.unary</code>: Request and Response unary communication API</li>
 <li><code>org.example.grpc.stream</code>: Stream communication API</li>
