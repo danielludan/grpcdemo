@@ -5,6 +5,7 @@ import io.grpc.stub.StreamObserver;
 import org.example.grpc.stream.greeting.ClientResponseStreamObserver;
 import org.example.grpc.stream.greeting.GreetingServiceGrpc;
 import org.example.grpc.stream.greeting.HelloRequest;
+import org.example.grpc.stream.greeting.HelloResponse;
 import org.example.sdk.SDKFacade;
 import org.example.sdk.common.dto.BaseDTO;
 import org.example.sdk.common.dto.RequestResult;
@@ -24,6 +25,8 @@ public class GreetingAPI {
      * 异步请求发送的流观察对象缓存，避免重复创建stub
      */
     public Map<String, StreamObserver> requestObserverCache = new HashMap<>();
+
+    public Map<String, StreamObserver> responseObserverCache = new HashMap<>();
 
     public Map<String, GreetingServiceGrpc.GreetingServiceStub> stubCache = new HashMap<>();
 
@@ -56,11 +59,13 @@ public class GreetingAPI {
             } else {
                 DefaultLogger.getLogger().debug("创建新的Stub");
                 org.example.grpc.stream.greeting.GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
-                StreamObserver<HelloRequest> requestStreamObserver = stub.clientFirstGreeting(new GreetingResponseStreamObserverWrapper<>(context));
+                GreetingResponseStreamObserverWrapper<HelloResponse> responseStreamObserverWrapper = new GreetingResponseStreamObserverWrapper<>(context);
+                StreamObserver<HelloRequest> requestStreamObserver = stub.clientFirstGreeting(responseStreamObserverWrapper);
                 requestObserverCache.put(request.getApi(), requestStreamObserver);
                 requestStreamObserver.onNext(HelloRequest.newBuilder().setName(request.getName()).build());
                 // TODO，Stub也需要缓存，但这里为了测试方便强制缓存
                 stubCache.put(UUID.randomUUID().toString(), stub);
+                responseObserverCache.put(UUID.randomUUID().toString(), responseStreamObserverWrapper);
             }
 
 
@@ -71,11 +76,13 @@ public class GreetingAPI {
             } else {
                 DefaultLogger.getLogger().debug("创建新的Stub");
                 org.example.grpc.stream.greeting.GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
-                StreamObserver<HelloRequest> requestStreamObserver = stub.serverFirstGreeting(new GreetingResponseStreamObserverWrapper<>(context));
+                GreetingResponseStreamObserverWrapper<HelloResponse> responseStreamObserverWrapper = new GreetingResponseStreamObserverWrapper<>(context);
+                StreamObserver<HelloRequest> requestStreamObserver = stub.serverFirstGreeting(responseStreamObserverWrapper);
                 requestObserverCache.put(request.getApi(), requestStreamObserver);
                 requestStreamObserver.onNext(HelloRequest.newBuilder().setName(request.getName()).build());
                 // TODO，Stub也需要缓存，但这里为了测试方便强制缓存
                 stubCache.put(UUID.randomUUID().toString(), stub);
+                responseObserverCache.put(UUID.randomUUID().toString(), responseStreamObserverWrapper);
             }
         } else {
             DefaultLogger.getLogger().error("无效API参数:" + request.getApi());

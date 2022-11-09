@@ -22,11 +22,11 @@ public class APITest {
 
     public static void main(String[] args) throws InterruptedException {
        GreetingAPI api = new GreetingAPI();
-       Thread.sleep(5000);
+       Thread.sleep(1000);
        api.greeting(new GreetingRequest("Daniel", GreetingRequest.API_CLIENT_FIRST));
-        Thread.sleep(5000);
+        Thread.sleep(1000);
        api.greeting(new GreetingRequest("Viola", GreetingRequest.API_CLIENT_FIRST));
-       Thread.sleep(10000);
+       Thread.sleep(2000);
        SDKFacade.getInstance().close();
     }
 
