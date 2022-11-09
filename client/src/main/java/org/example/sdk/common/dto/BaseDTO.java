@@ -46,4 +46,14 @@ public class BaseDTO<T> {
     public void setPayload(T payload) {
         this.payload = payload;
     }
+
+    @Override
+    public String toString() {
+        return "BaseDTO{" +
+                "success=" + success +
+                ", errCode='" + errCode + '\'' +
+                ", errMsg='" + errMsg + '\'' +
+                ", payload=" + payload +
+                '}';
+    }
 }

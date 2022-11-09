@@ -13,7 +13,7 @@ import java.util.Map;
 public abstract class ResponseStreamObserverWrapper<V> implements StreamObserver<V> {
 
     // 上下文信息
-    private Context context;
+    protected Context context;
 
     public ResponseStreamObserverWrapper() {
     }
@@ -45,6 +45,8 @@ public abstract class ResponseStreamObserverWrapper<V> implements StreamObserver
         DefaultLogger.getLogger().info("收到服务端的流关闭信息");
     }
 
+
+
     /**
      * 构造Stub时传入的上下文信息
      */
@@ -68,6 +70,14 @@ public abstract class ResponseStreamObserverWrapper<V> implements StreamObserver
 
         public void setObjectValue(Map<String, Object> objectValue) {
             this.objectValue = objectValue;
+        }
+
+        @Override
+        public String toString() {
+            return "Context{" +
+                    "stringValues=" + stringValues +
+                    ", objectValue=" + objectValue +
+                    '}';
         }
     }
 
