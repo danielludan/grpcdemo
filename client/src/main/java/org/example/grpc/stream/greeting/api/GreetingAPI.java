@@ -55,7 +55,7 @@ public class GreetingAPI {
         if (GreetingRequest.API_CLIENT_FIRST.equals(request.getApi())) {
             if (requestObserverCache.containsKey(request.getApi())) {
                 DefaultLogger.getLogger().debug("使用缓存的Stub");
-                requestObserverCache.get(request.getApi()).onNext(request.getName());
+                requestObserverCache.get(request.getApi()).onNext(HelloRequest.newBuilder().setName(request.getName()).build());
             } else {
                 DefaultLogger.getLogger().debug("创建新的Stub");
                 org.example.grpc.stream.greeting.GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
@@ -63,16 +63,13 @@ public class GreetingAPI {
                 StreamObserver<HelloRequest> requestStreamObserver = stub.clientFirstGreeting(responseStreamObserverWrapper);
                 requestObserverCache.put(request.getApi(), requestStreamObserver);
                 requestStreamObserver.onNext(HelloRequest.newBuilder().setName(request.getName()).build());
-                // TODO，Stub也需要缓存，但这里为了测试方便强制缓存
-                stubCache.put(UUID.randomUUID().toString(), stub);
-                responseObserverCache.put(UUID.randomUUID().toString(), responseStreamObserverWrapper);
             }
 
 
         } else if (GreetingRequest.API_SERVER_FIRST.equals(request.getApi())) {
             if (requestObserverCache.containsKey(request.getApi())) {
                 DefaultLogger.getLogger().debug("使用缓存的Stub");
-                requestObserverCache.get(request.getApi()).onNext(request.getName());
+                requestObserverCache.get(request.getApi()).onNext(HelloRequest.newBuilder().setName(request.getName()).build());
             } else {
                 DefaultLogger.getLogger().debug("创建新的Stub");
                 org.example.grpc.stream.greeting.GreetingServiceGrpc.GreetingServiceStub stub = GreetingServiceGrpc.newStub(channel);
@@ -80,9 +77,6 @@ public class GreetingAPI {
                 StreamObserver<HelloRequest> requestStreamObserver = stub.serverFirstGreeting(responseStreamObserverWrapper);
                 requestObserverCache.put(request.getApi(), requestStreamObserver);
                 requestStreamObserver.onNext(HelloRequest.newBuilder().setName(request.getName()).build());
-                // TODO，Stub也需要缓存，但这里为了测试方便强制缓存
-                stubCache.put(UUID.randomUUID().toString(), stub);
-                responseObserverCache.put(UUID.randomUUID().toString(), responseStreamObserverWrapper);
             }
         } else {
             DefaultLogger.getLogger().error("无效API参数:" + request.getApi());
